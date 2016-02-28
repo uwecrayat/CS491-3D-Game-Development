@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ArrowController : MonoBehaviour {
     public Transform target;
+    public GameObject[] buttons;
     private Vector3 toCollectible;
     private GameObject nearestCollectible;
 

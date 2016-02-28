@@ -1,45 +1,49 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
     public GameObject canvas;
-    public GameObject arrow;
+    public GameObject[] buttons;
+    public Button take;
+
+    private Stack moveList = new Stack();
     private GameObject objectToTake;
     private GameObject nearestCollectible;
     private Vector3 toCollectible;
 	// Use this for initialization
 	void Start () {
-	
-	}
+        for (int i = 0; i < buttons.Length; i++)
+        {
+            moveList.Push(buttons[i]);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
-        float nearestSquaredDistance = Mathf.Infinity;
-        foreach (GameObject collectible in GameObject.FindGameObjectsWithTag("Collectible"))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            toCollectible = collectible.transform.position - transform.position;
-            float squaredDistance = toCollectible.sqrMagnitude;
-            if(squaredDistance < nearestSquaredDistance)
-            {
-                nearestCollectible = collectible;
-                nearestSquaredDistance = squaredDistance;
-            }
+            take.enabled = !take.enabled;
         }
-        toCollectible = nearestCollectible.transform.position - transform.position;
-        float angle = Vector3.Angle(toCollectible, transform.forward);
-        Vector3 crossProduct = Vector3.Cross(toCollectible, transform.forward);
-
-        if(crossProduct.y < 0)
-        {
-            angle = -angle;
-        }
-        arrow.GetComponent<RectTransform>().eulerAngles = new Vector3(0, 0, angle);
     }
 
     private void ShowUI(bool isEnabled)
     {
+        if (objectToTake == (moveList.Peek() as GameObject) && moveList.Count != 0)
+        {
+            take.enabled = true;
+            take.transform.localScale = Vector3.one;
+            moveList.Pop();
+        }
+        else
+        {
+            take.enabled = false;
+            take.transform.localScale = new Vector3(0, 1, 1);
+
+        }
         canvas.SetActive(isEnabled);
+
         GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = !isEnabled;
         Cursor.lockState = isEnabled ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = isEnabled;
