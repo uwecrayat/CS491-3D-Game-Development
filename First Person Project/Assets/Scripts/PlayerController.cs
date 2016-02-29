@@ -15,15 +15,15 @@ public class PlayerController : MonoBehaviour {
     private GameObject objectToTake;
     private GameObject nearestCollectible;
     private Vector3 toCollectible;
-    private int numHints;
+    public int numHints;
     private float timeToNoHint;
 
 	// Use this for initialization
 	void Start () {
-        numHints = 3;
-        for (int i = 0; i < buttons.Length; i++)
+        int size = UnityEngine.Random.Range(4,10);
+        for (int i = 0; i < size; i++)
         {
-            moveList.Push(buttons[i]);
+            moveList.Push(buttons[UnityEngine.Random.Range(0,20) % 4]);
         }
     }
 
