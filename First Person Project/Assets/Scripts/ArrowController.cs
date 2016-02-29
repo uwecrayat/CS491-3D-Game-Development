@@ -14,18 +14,18 @@ public class ArrowController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float nearestSquaredDistance = Mathf.Infinity;
-        foreach (GameObject collectible in GameObject.FindGameObjectsWithTag("Collectible"))
-        {
-            toCollectible = collectible.transform.position - transform.position;
-            float squaredDistance = toCollectible.sqrMagnitude;
-            if (squaredDistance < nearestSquaredDistance)
-            {
-                nearestCollectible = collectible;
-                nearestSquaredDistance = squaredDistance;
-            }
-        }
-        Vector3 relativePos = nearestCollectible.transform.position - transform.position;
+        //float nearestSquaredDistance = Mathf.Infinity;
+        //foreach (GameObject collectible in GameObject.FindGameObjectsWithTag("Collectible"))
+        //{
+        //    toCollectible = collectible.transform.position - transform.position;
+        //    float squaredDistance = toCollectible.sqrMagnitude;
+        //    if (squaredDistance < nearestSquaredDistance)
+        //    {
+        //        nearestCollectible = collectible;
+        //        nearestSquaredDistance = squaredDistance;
+        //    }
+        //}
+        Vector3 relativePos = target.position - transform.position;
         Quaternion rotation = Quaternion.LookRotation(relativePos);
         transform.rotation = rotation;
     }

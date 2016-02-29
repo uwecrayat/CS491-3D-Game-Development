@@ -8,10 +8,6 @@ public class CollectibleController : MonoBehaviour {
 	
 	}
 	
-   public void Acquire()
-    {
-        Destroy(gameObject);
-    }
 	// Update is called once per frame
 	void Update () {
 	
