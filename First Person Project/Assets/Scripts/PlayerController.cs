@@ -33,10 +33,7 @@ public class PlayerController : MonoBehaviour {
     private void ShowUI(bool isEnabled)
     {
         print(moveList.Count);
-        if (moveList.Count != 0 && objectToTake == (moveList.Peek() as GameObject))
-        {
-            moveList.Pop();
-        }
+        
         
         canvas.SetActive(isEnabled);
         GetComponent<UnityStandardAssets.Characters.FirstPerson.FirstPersonController>().enabled = !isEnabled;
@@ -51,7 +48,12 @@ public class PlayerController : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
+
         objectToTake = collider.gameObject;
+        if (moveList.Count != 0 && objectToTake == (moveList.Peek() as GameObject))
+        {
+            moveList.Pop();
+        }
         ShowUI(true);
     }
 }
