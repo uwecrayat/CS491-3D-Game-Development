@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject[] buttons;
     public Text hintText;
     public Text buttonMsg;
-    public string nextLevel;
+    public int nextLevel;
 
     private Stack moveList = new Stack();
     private GameObject objectToTake;
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour {
         if(moveList.Count == 0)
         {
             
-            SceneManager.LoadScene(SceneManager.GetSceneByName(nextLevel).name);
+            SceneManager.LoadScene(nextLevel);
         }
     }
 
